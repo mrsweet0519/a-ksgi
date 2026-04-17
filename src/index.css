@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #3b82f6;
+  --color-primary-dark: #1d4ed8;
+  --color-secondary: #6366f1;
+  --color-accent: #8b5cf6;
+  
+  --font-sans: "Inter", "Pretendard", system-ui, -apple-system, sans-serif;
+  
+  --shadow-premium: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased;
+    font-size: 1.1rem; /* 부장님을 위한 넉넉한 글씨 크기 */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-slate-900;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl border border-slate-100 shadow-premium p-6 transition-all;
+  }
+  
+  .card-hover {
+    @apply hover:shadow-xl hover:translate-y-[-2px] hover:border-blue-100;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white px-5 py-2.5 rounded-xl font-semibold shadow-premium hover:bg-primary-dark transition-all active:scale-95;
+  }
+  
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-premium;
+  }
+}
+
+/* 인쇄 시 레이아웃 최적화 */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+  
+  body {
+    background-color: white !important;
+    font-size: 12pt;
+  }
+  
+  .card {
+    box-shadow: none !important;
+    border: 1px solid #eee !important;
+    break-inside: avoid;
+  }
+}
