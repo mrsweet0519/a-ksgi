@@ -8,8 +8,8 @@ import {
   Settings as SettingsIcon,
   Printer,
   ChevronRight,
-  GraduationCap,
-  Building2
+  Heart,
+  Sparkles
 } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
@@ -22,9 +22,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     { name: '월간 대시보드', path: '/', icon: LayoutDashboard },
     { name: '좌담회 관리', path: '/zadankai', icon: Users },
     { name: '부서별 일정', path: '/meetings', icon: Calendar },
-    { name: '포교/학교관리', path: '/school', icon: GraduationCap },
     { name: '멘토링 관리', path: '/mentoring', icon: UserPlus },
-    { name: '대그룹 관리', path: '/department', icon: Building2 },
+    { name: '여성부 행복총회', path: '/assembly', icon: Heart },
+    { name: '지구별 제목회', path: '/chanting', icon: Sparkles },
     { name: '운영회의 기록', path: '/reports', icon: ClipboardList },
     { name: '시스템 설정', path: '/settings', icon: SettingsIcon },
   ];

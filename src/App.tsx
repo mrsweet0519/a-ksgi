@@ -6,9 +6,9 @@ import JwadamPage from './pages/JwadamPage';
 import MentoringPage from './pages/MentoringPage';
 import MeetingPage from './pages/MeetingPage';
 import ReportsPage from './pages/ReportsPage';
-import SchoolPage from './pages/SchoolPage';
-import DepartmentPage from './pages/DepartmentPage';
 import SettingsPage from './pages/SettingsPage';
+import AssemblySchedulePage from './pages/AssemblySchedulePage';
+import ChantingSchedulePage from './pages/ChantingSchedulePage';
 
 const queryClient = new QueryClient();
 
@@ -21,9 +21,9 @@ function App() {
             <Route path="/" element={<DashboardPage />} />
             <Route path="/zadankai" element={<JwadamPage />} />
             <Route path="/meetings" element={<MeetingPage />} />
-            <Route path="/school" element={<SchoolPage />} />
             <Route path="/mentoring" element={<MentoringPage />} />
-            <Route path="/department" element={<DepartmentPage />} />
+            <Route path="/assembly" element={<AssemblySchedulePage />} />
+            <Route path="/chanting" element={<ChantingSchedulePage />} />
             <Route path="/reports" element={<ReportsPage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Routes>
