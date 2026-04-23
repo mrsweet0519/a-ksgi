@@ -1,136 +1,210 @@
+import React, { useState, useMemo } from 'react';
 import { 
   UserPlus, 
-  Map, 
   Search, 
-  User, 
-  Link as LinkIcon, 
   Calendar, 
   MessageCircle, 
-  ChevronRight
+  Filter, 
+  Download, 
+  Heart, 
+  Link as LinkIcon,
+  CheckCircle2,
+  Clock,
+  AlertCircle
 } from 'lucide-react';
+import { mockMentoring, mockYouthSchool } from '../data/mockData';
+import { cn } from '../utils/cn';
 
 const MentoringPage = () => {
+  const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'completed' | 'hold'>('all');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredMatches = useMemo(() => {
+    return mockMentoring.filter(match => {
+      const matchesSearch = match.menteeName.includes(searchTerm) || match.mentorName.includes(searchTerm);
+      if (!matchesSearch) return false;
+      if (statusFilter !== 'all' && match.status !== statusFilter) return false;
+      return true;
+    });
+  }, [statusFilter, searchTerm]);
+
+  const stats = {
+    total: mockMentoring.length,
+    active: mockMentoring.filter(m => m.status === 'active').length,
+    unmatchedCount: mockYouthSchool.filter(y => y.matchingStatus === 'unmatched').length,
+    completed: mockMentoring.filter(m => m.status === 'completed').length
+  };
+
   return (
-    <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
-      <section className="flex items-center justify-between">
+    <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500 pb-12">
+      {/* Header */}
+      <section className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h2 className="text-3xl font-black text-slate-900">멘토링 관리</h2>
-          <p className="text-sm font-medium text-slate-400 mt-1">멘토-멘티 매칭 및 1:1 활동 기록을 관리합니다.</p>
+          <p className="text-sm font-medium text-slate-400 mt-1">청년 실질 명단과 리더(멘토)를 연결하고 활동을 기록합니다.</p>
         </div>
-        <button className="btn-primary flex items-center gap-2">
-          <UserPlus className="w-5 h-5" /> 새 매칭 등록
-        </button>
+        <div className="flex gap-2">
+          <button className="px-4 py-2 border border-slate-200 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 transition-all flex items-center gap-2" onClick={() => window.print()}>
+            <Download className="w-4 h-4" /> 멘토링 현황 출력
+          </button>
+          <button className="btn-primary flex items-center gap-2 shadow-lg shadow-rose-200 !bg-rose-600 hover:!bg-rose-700">
+            <UserPlus className="w-5 h-5" /> 새 매칭 연결
+          </button>
+        </div>
       </section>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        {/* Search & Stats */}
-        <div className="lg:col-span-1 space-y-6">
-          <div className="card bg-blue-600 text-white border-none shadow-xl shadow-blue-200 p-8">
-            <h3 className="text-lg font-black mb-1">매칭 현황</h3>
-            <div className="text-4xl font-black mb-4">92%</div>
-            <div className="w-full bg-blue-400 h-2 rounded-full overflow-hidden mb-4">
-              <div className="bg-white h-full rounded-full" style={{ width: '92%' }}></div>
-            </div>
-            <p className="text-xs font-bold text-blue-100">총 40명 중 37명 매칭 완료</p>
-          </div>
-
-          <div className="card space-y-4">
-            <h4 className="text-sm font-black text-slate-400 uppercase tracking-widest">미매칭 인원 (3)</h4>
-            {['김미소', '최하늘', '박지은'].map((name) => (
-              <div key={name} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer group">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center">
-                    <User className="w-4 h-4 text-slate-500" />
-                  </div>
-                  <span className="text-sm font-black text-slate-700">{name}</span>
-                </div>
-                <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-blue-500" />
-              </div>
-            ))}
-          </div>
+      {/* Summary Cards */}
+      <section className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="card bg-white p-6 border-b-4 border-b-rose-500 shadow-premium">
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">전체 매칭</p>
+          <p className="text-3xl font-black text-slate-800">{stats.total}건</p>
         </div>
+        <div className="card bg-white p-6 border-b-4 border-b-blue-500 shadow-premium">
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">현재 진행중</p>
+          <p className="text-3xl font-black text-blue-600">{stats.active}건</p>
+        </div>
+        <div className="card bg-white p-6 border-b-4 border-b-amber-500 shadow-premium">
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">멘토 미매칭 인원</p>
+          <p className="text-3xl font-black text-amber-600">{stats.unmatchedCount}명</p>
+          <p className="text-[10px] font-bold text-amber-400 mt-1">* 청년스쿨 실질 대상 기준</p>
+        </div>
+        <div className="card bg-white p-6 border-b-4 border-b-emerald-500 shadow-premium">
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">매칭 완료/졸업</p>
+          <p className="text-3xl font-black text-emerald-600">{stats.completed}건</p>
+        </div>
+      </section>
 
-        {/* Main Content: Matching Board */}
-        <div className="lg:col-span-3 space-y-6">
-          <div className="card">
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-xl font-black text-slate-800 flex items-center gap-2">
-                <Map className="w-5 h-5 text-blue-600" /> 멘토-멘티 매칭 보드
-              </h3>
-              <div className="relative w-64">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                <input type="text" placeholder="검색..." className="w-full bg-slate-50 border-none rounded-lg py-2 pl-9 pr-4 text-xs font-bold" />
-              </div>
-            </div>
+      {/* Control Bar */}
+      <section className="flex flex-col lg:flex-row gap-4 items-center justify-between bg-white p-4 rounded-2xl border border-slate-100 shadow-sm no-print">
+        <div className="flex bg-slate-100 p-1 rounded-xl w-full lg:w-auto overflow-x-auto">
+          {[
+            { id: 'all', label: '전체 보기' },
+            { id: 'active', label: '진행중' },
+            { id: 'hold', label: '보류' },
+            { id: 'completed', label: '완료' },
+          ].map((mode) => (
+            <button 
+              key={mode.id}
+              onClick={() => setStatusFilter(mode.id as any)}
+              className={cn(
+                "px-5 py-2 text-xs font-black rounded-lg transition-all whitespace-nowrap",
+                statusFilter === mode.id 
+                  ? "bg-white text-rose-600 shadow-sm" 
+                  : "text-slate-500 hover:text-slate-800"
+              )}
+            >
+              {mode.label}
+            </button>
+          ))}
+        </div>
+        <div className="relative flex-1 max-w-md w-full">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <input 
+            type="text" 
+            placeholder="멘티 또는 멘토 성함 검색..." 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full bg-slate-50 border-none rounded-xl py-2.5 pl-10 pr-4 text-sm font-medium outline-none"
+          />
+        </div>
+      </section>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[
-                { mentor: '이영희 (부장)', mentee: '박소담 (청년)', date: '2026-03-01', status: 'active' },
-                { mentor: '정춘자 (반장)', mentee: '이지은 (미래)', date: '2026-02-15', status: 'active' },
-                { mentor: '선우지현', mentee: '최다빈', date: '2026-04-10', status: 'new' },
-                { mentor: '김부녀', mentee: '홍길순', date: '2026-01-20', status: 'active' },
-              ].map((match, i) => (
-                <div key={i} className="bg-slate-50/50 border border-slate-100 rounded-2xl p-5 hover:border-blue-200 hover:bg-white hover:shadow-premium transition-all group">
-                  <div className="flex items-center justify-between mb-4">
+      {/* Table List */}
+      <section className="card p-0 overflow-hidden shadow-premium">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left">
+            <thead className="bg-slate-50">
+              <tr>
+                <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">멘티 ↔ 멘토</th>
+                <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">매칭 유형</th>
+                <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">연결일</th>
+                <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">1:1 근행회 일정</th>
+                <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">상태</th>
+                <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">메모</th>
+                <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">관리</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {filteredMatches.map((match) => (
+                <tr key={match.id} className="hover:bg-slate-50/50 transition-colors group">
+                  <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="text-center">
-                        <p className="text-[10px] font-black text-slate-400 mb-1">MENTOR</p>
-                        <div className="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center text-blue-700 font-black">
-                          {match.mentor[0]}
+                      <div className="flex -space-x-2">
+                        <div className="w-8 h-8 rounded-full bg-blue-100 border-2 border-white flex items-center justify-center text-xs font-black text-blue-700">
+                          {match.mentorName[0]}
+                        </div>
+                        <div className="w-8 h-8 rounded-full bg-rose-100 border-2 border-white flex items-center justify-center text-xs font-black text-rose-700">
+                          {match.menteeName[0]}
                         </div>
                       </div>
-                      <LinkIcon className="w-4 h-4 text-slate-300 mt-4" />
-                      <div className="text-center">
-                        <p className="text-[10px] font-black text-slate-400 mb-1">MENTEE</p>
-                        <div className="w-12 h-12 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-700 font-black">
-                          {match.mentee[0]}
-                        </div>
+                      <div>
+                        <p className="text-sm font-black text-slate-800">{match.menteeName}</p>
+                        <p className="text-[10px] font-bold text-slate-400">멘토: {match.mentorName}</p>
                       </div>
                     </div>
-                    {match.status === 'new' && (
-                      <span className="bg-blue-600 text-white text-[9px] font-black px-2 py-1 rounded-full">NEW</span>
+                  </td>
+                  <td className="px-6 py-4">
+                    <span className={cn(
+                      "px-2 py-0.5 rounded text-[10px] font-black",
+                      match.matchingType === '장남일체' ? "bg-indigo-50 text-indigo-600" :
+                      match.matchingType === '부녀일체' ? "bg-rose-50 text-rose-600" : "bg-slate-100 text-slate-500"
+                    )}>
+                      {match.matchingType}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 text-xs font-bold text-slate-500">{match.connectedDate}</td>
+                  <td className="px-6 py-4">
+                    {match.oneOnOneSchedule ? (
+                      <div className="flex items-center gap-1.5 text-xs font-black text-slate-700">
+                        <Calendar className="w-3.5 h-3.5 text-blue-500" />
+                        {match.oneOnOneSchedule}
+                      </div>
+                    ) : (
+                      <span className="text-slate-300 text-xs italic">일정 미정</span>
                     )}
-                  </div>
-                  
-                  <div className="flex justify-between items-end">
-                    <div>
-                      <p className="text-sm font-black text-slate-800">{match.mentor} ↔ {match.mentee}</p>
-                      <p className="text-[11px] font-bold text-slate-400 mt-1">매칭일: {match.date}</p>
-                    </div>
-                    <button className="text-xs font-black text-blue-600 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-all">
-                      기록 보기
+                  </td>
+                  <td className="px-6 py-4">
+                    <span className={cn(
+                      "px-2 py-0.5 rounded-full text-[10px] font-black",
+                      match.status === 'active' ? "bg-blue-50 text-blue-600" :
+                      match.status === 'completed' ? "bg-emerald-50 text-emerald-600" : 
+                      match.status === 'hold' ? "bg-amber-50 text-amber-600" : "bg-slate-100 text-slate-400"
+                    )}>
+                      {match.status === 'active' ? '진행중' : match.status === 'completed' ? '완료' : match.status === 'hold' ? '보류' : '종료'}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 max-w-[200px]">
+                    <p className="text-xs text-slate-500 truncate" title={match.memo}>{match.memo || '-'}</p>
+                  </td>
+                  <td className="px-6 py-4 text-right">
+                    <button className="text-[10px] font-black text-slate-400 hover:text-blue-600 transition-colors">
+                      기록/수정
                     </button>
-                  </div>
-                </div>
+                  </td>
+                </tr>
               ))}
-            </div>
-          </div>
-
-          <div className="card">
-            <h3 className="text-xl font-black text-slate-800 mb-6 flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-indigo-500" /> 최근 활동 (1:1 근행회 등)
-            </h3>
-            <div className="space-y-4">
-              {[
-                { type: '1:1 근행회', name: '이영희 ↔ 박소담', detail: '가정 방문 근행회 진행, 청년 고민 청취', date: '어제' },
-                { type: '전화 상담', name: '정춘자 ↔ 이지은', detail: '새 학기 적응 관련 격려 대화', date: '2일 전' },
-              ].map((log, i) => (
-                <div key={i} className="flex gap-4 p-4 border-l-4 border-blue-500 bg-slate-50 rounded-r-xl">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs font-black text-blue-600 uppercase">{log.type}</span>
-                      <span className="text-[10px] text-slate-400 font-bold">• {log.date}</span>
-                    </div>
-                    <p className="text-sm font-black text-slate-800 mb-1">{log.name}</p>
-                    <p className="text-sm text-slate-500 font-medium">{log.detail}</p>
-                  </div>
-                  <MessageCircle className="w-5 h-5 text-slate-300" />
-                </div>
-              ))}
-            </div>
-          </div>
+            </tbody>
+          </table>
         </div>
-      </div>
+      </section>
+
+      {/* Unmatched Banner */}
+      {stats.unmatchedCount > 0 && (
+        <section className="card bg-amber-50 border-amber-100 p-6 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-amber-500 rounded-2xl text-white">
+              <AlertCircle className="w-6 h-6" />
+            </div>
+            <div>
+              <h4 className="text-sm font-black text-amber-900">멘토 매칭이 필요한 청년이 {stats.unmatchedCount}명 있습니다.</h4>
+              <p className="text-xs text-amber-700 mt-1 font-medium">청년스쿨 실질 명단 중 아직 멘토링이 시작되지 않은 분들을 확인해 보세요.</p>
+            </div>
+          </div>
+          <button className="bg-amber-600 text-white px-4 py-2 rounded-xl text-xs font-black shadow-lg shadow-amber-200 hover:bg-amber-700 transition-all">
+            미매칭 명단 확인하기
+          </button>
+        </section>
+      )}
     </div>
   );
 };

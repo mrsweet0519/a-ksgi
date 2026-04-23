@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계수지부 여성부총회 승리 기원문</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #d4a373;
+            --accent-color: #faedcd;
+            --text-color: #2c3e50;
+            --bg-overlay: rgba(255, 255, 255, 0.85);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Gowun Batang', serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* A4 사이즈 설정 (96dpi 기준) */
+        .poster {
+            width: 210mm;
+            height: 297mm;
+            background-image: url('./assets/gyesu_prayer_bg.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .content-box {
+            background: var(--bg-overlay);
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            padding: 50px 40px;
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.5);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            color: #b07d62;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .header .subtitle {
+            font-size: 24px;
+            color: #8d99ae;
+            font-weight: bold;
+        }
+
+        .prayer-list {
+            list-style: none;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .prayer-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 8px solid #f9844a;
+            transition: transform 0.3s ease;
+        }
+
+        .prayer-item:hover {
+            transform: scale(1.02);
+        }
+
+        .bullet {
+            font-size: 32px;
+            margin-right: 20px;
+            color: #f9844a;
+        }
+
+        .text {
+            font-size: 26px;
+            line-height: 1.6;
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 20px;
+            color: #b07d62;
+            font-weight: bold;
+            border-top: 1px solid rgba(176, 125, 98, 0.3);
+            padding-top: 20px;
+        }
+
+        /* 인쇄 시 설정 */
+        @media print {
+            body { background: none; padding: 0; }
+            .poster { box-shadow: none; margin: 0; }
+            button { display: none; }
+        }
+
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background: #b07d62;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">포스터 인쇄 / PDF 저장</button>
+
+    <div class="poster">
+        <div class="content-box">
+            <div class="header">
+                <h1>여성부총회 승리 기원문</h1>
+                <div class="subtitle">계수지부</div>
+            </div>
+
+            <ul class="prayer-list">
+                <li class="prayer-item">
+                    <span class="bullet">🌸</span>
+                    <span class="text">이체동심 최고의 단결로<br>총합력을 내는 계수지부</span>
+                </li>
+                <li class="prayer-item">
+                    <span class="bullet">✨</span>
+                    <span class="text">전 회원님들이 복운가득한<br>체험담이 넘치는 계수지부</span>
+                </li>
+                <li class="prayer-item">
+                    <span class="bullet">☀️</span>
+                    <span class="text">총회 당일 무사고,<br>대청천 기원</span>
+                </li>
+                <li class="prayer-item">
+                    <span class="bullet">🌱</span>
+                    <span class="text">불연의 씨앗을 내 우인과 회우에게<br>심을 수 있는 여성부총회</span>
+                </li>
+                <li class="prayer-item">
+                    <span class="bullet">🤝</span>
+                    <span class="text">비활, 장결자들과 연결이 되어<br>함께 도전할 수 있는 총회</span>
+                </li>
+            </ul>
+
+            <div class="footer">
+                우리는 반드시 승리합니다! 계수지부 화이팅!
+            </div>
+        </div>
+    </div>
+</body>
+</html>

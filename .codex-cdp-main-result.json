@@ -1,0 +1,80 @@
+{
+  "browser": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+  "url": "http://localhost:5173/",
+  "consoleMessages": [
+    "warning: The width(-1) and height(-1) of chart should be greater than 0,\n       please check the style of container, or the props width(100%) and height(100%),\n       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the\n       height and width.",
+    "warning: The width(-1) and height(-1) of chart should be greater than 0,\n       please check the style of container, or the props width(100%) and height(100%),\n       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the\n       height and width."
+  ],
+  "pageErrors": [],
+  "requestFailures": [],
+  "logEntries": [],
+  "clickResults": [
+    "click-ok: 0 환경 설정",
+    "click-ok: 1 인쇄하기",
+    "click-ok: 2 월간 보고서 생성",
+    "click-ok: 3 새 일정 등록",
+    "click-ok: 4 일정 전체 보기 →",
+    "click-ok: 5 회의자료 초안 생성"
+  ],
+  "title": "ksgi",
+  "bodyText": "KSGI 지부 파트너\n\nBRANCH MANAGEMENT SYSTEM\n\n월간 대시보드\n좌담회 관리\n부서별 일정\n멘토링 관리\n여성부 행복총회\n지구별 제목회\n운영회의 기록\n시스템 설정\n여\n\n계수지부 여성부장\n\n운영 모드 활성 중\n\n환경 설정\n지부 운영 자동화 시스템\n인쇄하기\n월간 보고서 생성\n\n2026년 4월\n\n지부 운영 현황 | 요약\n새 일정 등록\n↑ 12%\n\n좌담회 총 인원\n\n124명\n\n지난달 대비 12% 증가\n\n↑ 5%\n\n신규 참석자\n\n15명\n\n확대 진행률 85%\n\n진행된 부원회\n\n8회\n\n여성부 4, 미래부 2, 기타 2\n\n↑ 2%\n\n멘토링 매칭\n\n92%\n\n미매칭 인원: 3명\n\n참석자 추이 분석\n\n최근 4개월간의 좌담회 참석 통계\n\n전체 부서\n여성부\n미래부\n1월\n2월\n3월\n4월\n0\n20\n40\n60\n80\n사진으로 자동 정리하기\n\n명단이나 회의록 사진을 올리면 데이터가 자동으로 채워집니다.\n\n여기에 사진 올리기\n\n파일 선택 또는 드래그\n\n최근 분석: 좌담회_명단.jpg\n\n완료\n\n* 인식된 명단이 자동으로 '좌담회 관리'에 추가되었습니다.\n\n이번 달 중점 과제\n청년스쿨 실질 명단 확정\n멘토링 1:1 근행회 일정 점검\n3월 좌담회 결과 보고서 출력\n신규 참석자 후속 접촉\n일정 전체 보기 →\n지부 운영회의 자료\n\n준비된 데이터를 바탕으로 이번 달 회의 안건지를 즉시 생성합니다.\n\n회의자료 초안 생성\n0",
+  "rootVisible": true,
+  "buttonCount": 6,
+  "linkCount": 8,
+  "buttons": [
+    {
+      "index": 0,
+      "label": "환경 설정",
+      "disabled": false,
+      "x": 143.5,
+      "y": 867,
+      "width": 221,
+      "height": 16
+    },
+    {
+      "index": 1,
+      "label": "인쇄하기",
+      "disabled": false,
+      "x": 1153.15625,
+      "y": 39.5,
+      "width": 112,
+      "height": 36
+    },
+    {
+      "index": 2,
+      "label": "월간 보고서 생성",
+      "disabled": false,
+      "x": 1295.078125,
+      "y": 39.5,
+      "width": 147.84375,
+      "height": 36
+    },
+    {
+      "index": 3,
+      "label": "새 일정 등록",
+      "disabled": false,
+      "x": 1284.8125,
+      "y": 164.1953125,
+      "width": 168.375,
+      "height": 46.390625
+    },
+    {
+      "index": 4,
+      "label": "일정 전체 보기 →",
+      "disabled": false,
+      "x": 1204.828125,
+      "y": 732.390625,
+      "width": 96.65625,
+      "height": 16
+    },
+    {
+      "index": 5,
+      "label": "회의자료 초안 생성",
+      "disabled": false,
+      "x": 1204.828125,
+      "y": 968.28125,
+      "width": 280.34375,
+      "height": 44
+    }
+  ]
+}

@@ -2,14 +2,15 @@ import { NavLink } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   Users, 
-  UserPlus, 
   Calendar, 
-  ClipboardList, 
   Settings as SettingsIcon,
   Printer,
   ChevronRight,
   Heart,
-  Sparkles
+  Sparkles,
+  GraduationCap,
+  ClipboardList,
+  Target
 } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
@@ -21,11 +22,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const menuItems = [
     { name: '월간 대시보드', path: '/', icon: LayoutDashboard },
     { name: '좌담회 관리', path: '/zadankai', icon: Users },
-    { name: '부서별 일정', path: '/meetings', icon: Calendar },
-    { name: '멘토링 관리', path: '/mentoring', icon: UserPlus },
-    { name: '여성부 행복총회', path: '/assembly', icon: Heart },
-    { name: '지구별 제목회', path: '/chanting', icon: Sparkles },
-    { name: '운영회의 기록', path: '/reports', icon: ClipboardList },
+    { name: '청년스쿨 관리', path: '/youth-school', icon: GraduationCap },
+    { name: '멘토링 관리', path: '/mentoring', icon: Heart },
+    { name: '부서별 부원회', path: '/meetings', icon: Calendar },
+    { name: '운영회의 자료', path: '/operations-meeting', icon: Target },
+    { name: '출력 센터', path: '/reports', icon: Printer },
     { name: '시스템 설정', path: '/settings', icon: SettingsIcon },
   ];
 
